@@ -6,19 +6,15 @@
 #include<vector>
 #include<algorithm>
 #include<map>
-
 using namespace std;
-using std::pair;
 using std::string;
 
 class WorkClass
 {
 public:
-	string inputFile;
-	string outputFile;
-	void readAndCountWords();
-	void writeWords();
-	WorkClass(string in, string out);
+	void readAndCountWords(const string in);
+	void writeWords(const string out);
+	WorkClass();
 	~WorkClass();
 private:
 	int allWords;

@@ -1,15 +1,13 @@
 #include "WorkClass.h"
 
-WorkClass::WorkClass(string in, string out)
+WorkClass::WorkClass()
 {
-	inputFile = in;
-	outputFile = out;
 	allWords = 0;
 }
 
-void WorkClass::readAndCountWords() 
+void WorkClass::readAndCountWords(const string in)
 {
-	ifstream fin(inputFile);
+	ifstream fin(in);
 	string currLine = "";
 	string currWord = "";
 	while (!fin.eof())
@@ -17,7 +15,7 @@ void WorkClass::readAndCountWords()
 		getline(fin, currLine);
 		for (int i = 0; i < (int)currLine.length(); i++)
 		{
-			while ((currLine[i] >= 'a' && currLine[i] <= 'z') || (currLine[i] >= 'A' && currLine[i] <= 'Z') || isdigit(currLine[i]))
+			while (isalnum(currLine[i]))
 			{
 				currWord += currLine[i];
 				i++;
@@ -29,17 +27,17 @@ void WorkClass::readAndCountWords()
 			}
 		}
 	}
-	
+	fin.close();
 }
-void WorkClass::writeWords() 
+void WorkClass::writeWords(const string out)
 {
-	vector<pair<string, int> > copyMap(wordFrequency.size());
-	copy(wordFrequency.begin(), wordFrequency.end(), copyMap.begin());
+	vector<pair<string, int> > copyMap(wordFrequency.begin(), wordFrequency.end());
 	sort(copyMap.begin(), copyMap.end(), [](const pair<string, int> &a, const pair<string, int> &b){return a.second > b.second;});
-	ofstream fout(outputFile);
+	ofstream fout(out);
 	for (const auto &pair : copyMap) {
 		fout << pair.first + " " + to_string(pair.second) + " " + to_string((double)pair.second /(double) allWords) + '\n';
 	}
+	fout.close();
 }
 WorkClass::~WorkClass()
 {

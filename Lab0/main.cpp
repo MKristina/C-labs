@@ -7,9 +7,9 @@ int main(int argc, char **argv) {
 	}
 	else 
 	{
-		WorkClass workObject(argv[1], argv[2]);
-		workObject.readAndCountWords();
-		workObject.writeWords();
+		WorkClass workObject;
+		workObject.readAndCountWords(argv[1]);
+		workObject.writeWords(argv[2]);
 	}
 	return 0;
 }
