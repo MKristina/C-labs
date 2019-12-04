@@ -82,7 +82,7 @@ namespace trit_set {
 		return position / (sizeof(uint) * 4);
 	}
 	TritSet::reference::operator Trit() const {
-		if (index >= (int)tset->size) return Unknown;
+		if ((int)tset->new_pos >= (int)tset->size) return Unknown;
 		return static_cast<Trit>(static_cast<uint>(3 & (* (tset->start + word_position(index)) >> trit_position(index) * 2)));	
 	}
 
