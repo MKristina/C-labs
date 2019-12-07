@@ -8,20 +8,13 @@
 using namespace trit_set;
 
 int main() {
-	//first simpe test
 	TritSet A(5);
 	TritSet B(5);
 	A[2] = True;
 	A[3] = False;
-	
-	Trit ttttt = A[3];
-	std::cout << "ttt " << ttttt << std::endl;
-	B = A;
-	
-	B[2] = False;
-	B[3] = True;
-	A[3] = B[3];
-	A[100] = A[2];
+	B[3] = A[2];
+	Trit ttttt = A[2];
+	B[2] = ttttt;	
 	std::cout << "A: " << A << std::endl;
 	std::cout << "B: " << B << std::endl;
 	std::cout << "A length: " << A.length() << std::endl;
@@ -33,7 +26,7 @@ int main() {
 	std::cout << "A trim: " << A << std::endl;
 	B.shrink();
 	std::cout << "B shrink: " << B << std::endl;
-	
+	A[20] = A[15];
 	_getch();
 	return 0;
 }
