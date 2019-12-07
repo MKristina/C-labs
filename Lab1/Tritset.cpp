@@ -75,15 +75,9 @@ namespace trit_set {
 	TritSet::reference::reference(uint *trit_ptr, int trit_index, TritSet *trit_set) :
 		ptr(trit_ptr), index(trit_index), tset(trit_set) {}
 	
-	constexpr size_t trit_position(size_t position) {
-		return position % (sizeof(uint) * 4);
-	}
-	constexpr size_t word_position(size_t position) {
-		return position / (sizeof(uint) * 4);
-	}
 	TritSet::reference::operator Trit() const {
 		if ((int)tset->new_pos >= (int)tset->size) return Unknown;
-		return static_cast<Trit>(static_cast<uint>(3 & (* (tset->start + word_position(index)) >> trit_position(index) * 2)));	
+		return static_cast<Trit>(static_cast<uint>(3 & (* (tset->start + (index / (sizeof(uint) * 4))) >> (index % (sizeof(uint) * 4)) * 2)));
 	}
 
 	TritSet::reference& TritSet::reference::operator=(Trit t) {
